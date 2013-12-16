@@ -8,7 +8,8 @@ import GameState.Keys;
 
 public class PlayState {
 
-	Word word;
+	private Word word;
+	private long waitTimer;
 	
 	public PlayState(){
 		init();
@@ -16,11 +17,15 @@ public class PlayState {
 	
 	public void init(){
 		word = new Word();
-		System.out.println(word.getWord());
+		word.splitWord();
 	}
 
 	public void moveWait(){ //counts down time before you can guess again
-		
+		waitTimer = System.nanoTime();
+		long elapsed = (System.nanoTime() - waitTimer) / 1000000;
+		if(elapsed > 1000){
+			System.out.println("goNow");
+		}
 	}
 	
 	public void update(){
