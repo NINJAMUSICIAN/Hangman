@@ -29,27 +29,48 @@ public class Word {
 				here = i;
 			}
 		}
-		System.out.println(here);
 		return here;
 	}
 	
+	public boolean alreadyGuessed(String s){
+		boolean returned = false;
+		
+		if(playstate.getGuessesMade() > 0){
+			for(int i = 0; i < playstate.getGuessedArr().length; i++){
+				if(playstate.getGuessedArr()[i].contains(s)){
+					System.out.println("you already guessed that!");
+					returned = true;
+				}
+			}
+		}
+		return returned;
+	}
+	
+		
 	public void checkGuess(String s){
 		int temp = 0;
 		
-		if(word.contains(s)){
-			System.out.println("right!");
-			System.out.println("correct guess was " + s);
-			
-			temp = findWhere(s);
-			playstate.setGuessed(playstate.getGuessesMade(), s);
-		}else{
-			System.out.println("wrong");
-			System.out.println("you guessed " + s);
-			
-			
-			temp = findWhere(s);
-			playstate.setGuessed(playstate.getGuessesMade(), s);
-			
+		if(!alreadyGuessed(s)){
+					if(word.contains(s)){
+						System.out.println("right!");
+						System.out.println("correct guess was " + s);
+						
+						temp = findWhere(s);
+						playstate.setGuessed(playstate.getGuessesMade(), s, true);
+						playstate.setRight(temp, s, true);
+						
+					}else{
+						
+						System.out.println("wrong");
+						System.out.println("you guessed " + s);
+						
+						
+						
+						playstate.setGuessed(playstate.getGuessesMade(), s, true);
+						playstate.setWrong(playstate.getWrongGuesses(), s, true);
+						playstate.setWrongGuesses(playstate.getWrongGuesses() + 1);
+						
+			}
 		}
 	}
 	
