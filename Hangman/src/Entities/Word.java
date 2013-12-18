@@ -58,6 +58,7 @@ public class Word {
 						temp = findWhere(s);
 						playstate.setGuessed(playstate.getGuessesMade(), s, true);
 						playstate.setRight(temp, s, true);
+						playstate.setRightGuesses(playstate.getRightGuesses() + 1);
 						
 					}else{
 						

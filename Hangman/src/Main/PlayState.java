@@ -14,7 +14,7 @@ public class PlayState {
 	private int guessesMade = 0;
 	private int wrongGuesses = 0;
 	private int rightGuesses = 0;
-	private boolean able = true, guessed = false;
+	private boolean able = true, guessed = false, won = false;
 	
 	private String[] guessedLets;
 	private String[] wrongLets;
@@ -106,6 +106,7 @@ public class PlayState {
 	public void update(){
 		handleInput();
 		moveWait();
+		checkWin();
 	}
 	
 	public void draw(Graphics g){
@@ -214,4 +215,16 @@ public class PlayState {
 	public void setAble(boolean b){
 		able = b;
 	}
+
+	public void checkWin(){
+		boolean won = false;
+		//System.out.println(word.getWord().length());
+		
+		if(rightGuesses == word.getWord().length()){
+			System.out.println("you win!");
+			won = true;
+		}
+	
+	}
+	
 }
