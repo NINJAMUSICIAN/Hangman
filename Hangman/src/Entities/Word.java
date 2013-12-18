@@ -22,7 +22,6 @@ public class Word {
 			rightGuessed[1] = s;
 			amountRight++;
 			for(int i = 0; i < amountRight; i++){
-				System.out.println("correct guess was " + rightGuessed[i]);
 			}
 			System.out.println("correct guess was " + rightGuessed[1]);
 			

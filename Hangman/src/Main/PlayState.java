@@ -10,7 +10,8 @@ public class PlayState {
 
 	private Word word;
 	private long waitTimer;
-	private boolean able = true;
+	private int started = 0;
+	private boolean able = true, guessed = false;;
 	
 	public PlayState(){
 		init();
@@ -25,19 +26,28 @@ public class PlayState {
 		able = b;
 	}
 	
-	public void moveWait(){ //counts down time before you can guess again
-		setAble(false);
-		waitTimer = System.nanoTime();
-		long elapsed = (System.nanoTime() - waitTimer) / 1000000;
+	public void startTimer(){
 		
-		if(elapsed > 1000){
-			System.out.println("goNow");
-			setAble(true);
+			waitTimer = System.nanoTime();
+		
+	}
+	
+	public void moveWait(){
+		//counts down time before you can guess again
+		if(started == 1){
+			long elapsed = (System.nanoTime() - waitTimer) / 1000000;
+			if(elapsed > 1000){
+				System.out.println("goNow");
+				setAble(true);
+				guessed = false;
+				started = 0;
+			}
 		}
 	}
 	
 	public void update(){
 		handleInput();
+		moveWait();
 	}
 	
 	public void draw(Graphics g){
@@ -49,6 +59,10 @@ public class PlayState {
 		if(able){
 		if(Keys.isPressed(Keys.D)){
 			word.checkGuess("d");
+			able = false;
+			guessed = true;
+			startTimer();
+			started = 1;
 			moveWait();
 			}
 		}
