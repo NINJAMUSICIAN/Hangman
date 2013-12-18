@@ -51,24 +51,24 @@ public class Keys {
 		else if(i == KeyEvent.VK_F) keyState[F] = b;
 		else if(i == KeyEvent.VK_G) keyState[G] = b;
 		else if(i == KeyEvent.VK_H) keyState[H] = b;
-		else if(i == KeyEvent.VK_E) keyState[I] = b;
-		else if(i == KeyEvent.VK_F) keyState[J] = b;
-		else if(i == KeyEvent.VK_G) keyState[K] = b;
-		else if(i == KeyEvent.VK_H) keyState[L] = b;
-		else if(i == KeyEvent.VK_E) keyState[M] = b;
-		else if(i == KeyEvent.VK_F) keyState[N] = b;
-		else if(i == KeyEvent.VK_G) keyState[O] = b;
-		else if(i == KeyEvent.VK_H) keyState[P] = b;
-		else if(i == KeyEvent.VK_E) keyState[Q] = b;
-		else if(i == KeyEvent.VK_F) keyState[R] = b;
-		else if(i == KeyEvent.VK_G) keyState[S] = b;
-		else if(i == KeyEvent.VK_H) keyState[T] = b;
-		else if(i == KeyEvent.VK_E) keyState[U] = b;
-		else if(i == KeyEvent.VK_F) keyState[V] = b;
-		else if(i == KeyEvent.VK_G) keyState[W] = b;
-		else if(i == KeyEvent.VK_H) keyState[X] = b;
-		else if(i == KeyEvent.VK_G) keyState[Y] = b;
-		else if(i == KeyEvent.VK_H) keyState[Z] = b;
+		else if(i == KeyEvent.VK_I) keyState[I] = b;
+		else if(i == KeyEvent.VK_J) keyState[J] = b;
+		else if(i == KeyEvent.VK_K) keyState[K] = b;
+		else if(i == KeyEvent.VK_L) keyState[L] = b;
+		else if(i == KeyEvent.VK_M) keyState[M] = b;
+		else if(i == KeyEvent.VK_N) keyState[N] = b;
+		else if(i == KeyEvent.VK_O) keyState[O] = b;
+		else if(i == KeyEvent.VK_P) keyState[P] = b;
+		else if(i == KeyEvent.VK_Q) keyState[Q] = b;
+		else if(i == KeyEvent.VK_R) keyState[R] = b;
+		else if(i == KeyEvent.VK_S) keyState[S] = b;
+		else if(i == KeyEvent.VK_T) keyState[T] = b;
+		else if(i == KeyEvent.VK_U) keyState[U] = b;
+		else if(i == KeyEvent.VK_V) keyState[V] = b;
+		else if(i == KeyEvent.VK_W) keyState[W] = b;
+		else if(i == KeyEvent.VK_X) keyState[X] = b;
+		else if(i == KeyEvent.VK_Y) keyState[Y] = b;
+		else if(i == KeyEvent.VK_Z) keyState[Z] = b;
 		
 		
 	}
