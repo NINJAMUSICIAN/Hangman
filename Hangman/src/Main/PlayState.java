@@ -41,10 +41,10 @@ public class PlayState {
 	
 	public void init(){
 		word = new Word(this);
-		word.splitWord();
+		word.init();
 		
 		guessedLets = new String[word.getWord().length() + 6];
-		wrongLets = new String[6];
+		wrongLets = new String[7];
 		rightLets = new String[word.getWord().length()];
 		
 		initArrays();
@@ -107,6 +107,7 @@ public class PlayState {
 		handleInput();
 		moveWait();
 		checkWin();
+		checkLose();
 	}
 	
 	public void draw(Graphics g){
@@ -226,5 +227,10 @@ public class PlayState {
 		}
 	
 	}
-	
+	public void checkLose(){
+		if(wrongGuesses == 6){
+			System.out.println("you lose!");
+			
+		}
+	}
 }

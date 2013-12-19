@@ -1,12 +1,20 @@
 package Entities;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Random;
+
 import Main.PlayState;
 
 public class Word {
 
+	int numWords;
+	String[] startWords;
+	
 	String[] words;
 	
-	private String word = "rdag";
+	private String word = "";
 	char[] cArray = word.toCharArray();
 	private String[] rightGuessed = new String[10];
 	private String[] wrongGuessed;
@@ -17,6 +25,41 @@ public class Word {
 	
 	public Word(PlayState p){
 		playstate = p;
+	}
+	
+	public void init(){
+		
+		word = makeAWord();
+		splitWord();
+	}
+	
+	public String makeAWord(){
+		
+		String word = "";
+		
+		try{
+			
+			InputStream in = getClass().getResourceAsStream("/Words");
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(in)
+				);
+			
+			numWords = Integer.parseInt(br.readLine());
+			 startWords = new String[numWords];
+			for(int i  = 0; i < startWords.length; i++){
+				String tempWord = br.readLine();
+				startWords[i] = tempWord;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		Random r = new Random();
+		int wordChoice = r.nextInt(startWords.length);
+		word = startWords[wordChoice];
+		
+		return word;
 	}
 	
 	public String getWord(){return word;}
