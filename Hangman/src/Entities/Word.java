@@ -1,5 +1,7 @@
 package Entities;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,6 +33,7 @@ public class Word {
 		
 		word = makeAWord();
 		splitWord();
+		System.out.println(word);
 	}
 	
 	public String makeAWord(){
@@ -129,5 +132,15 @@ public class Word {
 		
 		
 		
+	}
+
+	public void drawDashes(Graphics g){
+		for(int i = 1; i < word.length() + 1; i++){
+			g.fillRect(i*60, 400, 40, 20);
+		}
+	}
+	public void draw(Graphics g){
+		g.setColor(Color.black);
+		drawDashes(g);
 	}
 }

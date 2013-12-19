@@ -113,6 +113,7 @@ public class PlayState {
 	public void draw(Graphics g){
 	g.setColor(Color.gray);	
 	g.fillRect(0, 0, 640, 480);
+	word.draw(g);
 	}
 
 	public void checkIt(String g){
