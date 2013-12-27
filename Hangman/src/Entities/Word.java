@@ -1,6 +1,7 @@
 package Entities;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,11 +13,17 @@ import Main.PlayState;
 public class Word {
 
 	int numWords;
-	String[] startWords;
+	private int usedLetter = -1;
 	
+	private String lietro = "";
+	private String[] startWords = new String[10];
+	private String[] startLetter = new String[10];
+	private int lietroPlace;
+	private int lietroGo = 	0;
 	String[] words;
 	
 	private String word = "";
+	
 	char[] cArray = word.toCharArray();
 	private String[] rightGuessed = new String[10];
 	private String[] wrongGuessed;
@@ -29,8 +36,14 @@ public class Word {
 		playstate = p;
 	}
 	
+	private void arrayInit(){
+		for(int i = 0; i < startWords.length; i++){
+			startLetter[i] = "";
+		}
+	}
+	
 	public void init(){
-		
+		arrayInit();
 		word = makeAWord();
 		splitWord();
 		System.out.println(word);
@@ -72,8 +85,12 @@ public class Word {
 		int here = -1;
 		for(int i = 0; i < words.length; i++){
 				if(s.equalsIgnoreCase(words[i])){
+					if(i != usedLetter){
+				usedLetter = i;
 				here = i;
+				}
 			}
+				
 		}
 		return here;
 	}
@@ -102,9 +119,12 @@ public class Word {
 						System.out.println("correct guess was " + s);
 						
 						temp = findWhere(s);
+						setLietroPlace(temp);
+						setLetter(s);
 						playstate.setGuessed(playstate.getGuessesMade(), s, true);
 						playstate.setRight(temp, s, true);
 						playstate.setRightGuesses(playstate.getRightGuesses() + 1);
+						startLetter[temp] = s;
 						
 					}else{
 						
@@ -119,6 +139,20 @@ public class Word {
 						
 			}
 		}
+	}
+	
+	public String getLetter(){
+		return lietro;
+	}
+	private void setLetter(String s){
+		lietro = s;
+	}
+	
+	public int getLietroPlace(){
+		return lietroPlace;
+	}
+	private void setLietroPlace(int i){
+		lietroPlace = i;
 	}
 	
 	public void splitWord(){
@@ -139,8 +173,17 @@ public class Word {
 			g.fillRect(i*60, 400, 40, 20);
 		}
 	}
+	public void drawLetter(Graphics g, String s, int place){
+		for(int i = 0; i < startLetter.length; i++){
+			g.drawString(startLetter[i], 60 * i + 75, 395);
+		}
+		
+	}
 	public void draw(Graphics g){
+		Font font = new Font("Serif", Font.BOLD, 32);
+		g.setFont(font);
 		g.setColor(Color.black);
 		drawDashes(g);
+		drawLetter(g, getLetter(), getLietroPlace());
 	}
 }

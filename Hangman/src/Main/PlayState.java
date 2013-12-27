@@ -3,6 +3,7 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Entities.Man;
 import Entities.Word;
 import GameState.Keys;
 
@@ -19,6 +20,8 @@ public class PlayState {
 	private String[] guessedLets;
 	private String[] wrongLets;
 	private String[] rightLets;
+	
+	private Man man;
 	
 	public PlayState(){
 		init();
@@ -43,6 +46,8 @@ public class PlayState {
 		word = new Word(this);
 		word.init();
 		
+		man = new Man(getWrongGuesses());
+		
 		guessedLets = new String[word.getWord().length() + 6];
 		wrongLets = new String[7];
 		rightLets = new String[word.getWord().length()];
@@ -58,7 +63,7 @@ public class PlayState {
 			
 			}
 		}
-		System.out.println("");
+		//System.out.println("");
 	}
 	public void setRight(int num, String let, boolean print){//which place in array && what the letter is to be put in
 		rightLets[num] = let;
@@ -108,16 +113,18 @@ public class PlayState {
 		moveWait();
 		checkWin();
 		checkLose();
+		man.update(wrongGuesses, won);
 	}
 	
 	public void draw(Graphics g){
 	g.setColor(Color.gray);	
 	g.fillRect(0, 0, 640, 480);
 	word.draw(g);
+	man.draw(g);
 	}
 
-	public void checkIt(String g){
-		word.checkGuess(g);
+	public void checkIt(String s){
+		word.checkGuess(s);
 		able = false;
 		guessed = true;
 		guessesMade++;
@@ -219,7 +226,7 @@ public class PlayState {
 	}
 
 	public void checkWin(){
-		boolean won = false;
+		won = false;
 		//System.out.println(word.getWord().length());
 		
 		if(rightGuesses == word.getWord().length()){
