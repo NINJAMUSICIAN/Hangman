@@ -16,6 +16,7 @@ public class Word {
 	private int usedLetter = -1;
 	
 	private String lietro = "";
+	private String category = "";
 	private String[] startWords = new String[10];
 	private String[] startLetter = new String[10];
 	private int lietroPlace;
@@ -73,6 +74,18 @@ public class Word {
 		
 		Random r = new Random();
 		int wordChoice = r.nextInt(startWords.length);
+		//int wordChoice = 54;
+		if(wordChoice >= 0 && wordChoice <= 12){
+			category = "noun";
+		}else if(wordChoice >= 13 && wordChoice <= 23){
+			category = "adjective";
+		}else if(wordChoice >= 24 && wordChoice <= 30){
+			category = "place";
+		}else if(wordChoice >= 31 && wordChoice <= 41){
+			category = "name";
+		}else{
+			category = "verb";
+		}
 		word = startWords[wordChoice];
 		
 		return word;
@@ -170,20 +183,27 @@ public class Word {
 
 	public void drawDashes(Graphics g){
 		for(int i = 1; i < word.length() + 1; i++){
-			g.fillRect(i*60, 400, 40, 20);
+			g.fillRect(i*49 + 84 - 49, 461, 30, 15);
 		}
 	}
 	public void drawLetter(Graphics g, String s, int place){
+		Font font = new Font("Arial", Font.PLAIN, 26);
+		g.setFont(font);
 		for(int i = 0; i < startLetter.length; i++){
-			g.drawString(startLetter[i], 60 * i + 75, 395);
+			g.drawString(startLetter[i], 49 * i + 88, 460);
 		}
-		
+	}
+	public void drawCategory(Graphics g){
+		Font font = new Font("Arial", Font.BOLD, 48);
+		g.setFont(font);
+		g.drawString(category, 250, 45);
 	}
 	public void draw(Graphics g){
-		Font font = new Font("Serif", Font.BOLD, 32);
-		g.setFont(font);
+		drawCategory(g);
+		
 		g.setColor(Color.black);
 		drawDashes(g);
 		drawLetter(g, getLetter(), getLietroPlace());
+		
 	}
 }

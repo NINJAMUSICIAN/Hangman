@@ -1,10 +1,12 @@
 package Main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import Entities.Man;
 import Entities.Word;
+import Entities.Images.Png;
 import GameState.Keys;
 
 public class PlayState {
@@ -16,6 +18,7 @@ public class PlayState {
 	private int wrongGuesses = 0;
 	private int rightGuesses = 0;
 	private boolean able = true, guessed = false, won = false;
+	private Png background;
 	
 	private String[] guessedLets;
 	private String[] wrongLets;
@@ -46,6 +49,10 @@ public class PlayState {
 		word = new Word(this);
 		word.init();
 		
+		//Images to be drawn
+		background = new Png("/Background.png");
+		
+		
 		man = new Man(getWrongGuesses());
 		
 		guessedLets = new String[word.getWord().length() + 6];
@@ -65,6 +72,24 @@ public class PlayState {
 		}
 		//System.out.println("");
 	}
+	public void drawGuessed(Graphics g){
+		Font font = new Font("Arial", Font.PLAIN, 24);
+		g.setFont(font);
+		//int y = 120;
+			for(int i = 0; i < 6; i++){
+				g.drawString(guessedLets[i], 100 + (25*i), 120);
+			}
+		
+		//g.drawString("Letters Guessed", 85, 90);
+		
+	}
+	public void drawGuessed2(Graphics g){
+		
+			for(int i = 6; i < guessedLets.length; i++){
+				g.drawString(guessedLets[i], 100 + (25*i) - 150, 150);
+			}
+	}
+	
 	public void setRight(int num, String let, boolean print){//which place in array && what the letter is to be put in
 		rightLets[num] = let;
 			if(print){
@@ -117,20 +142,29 @@ public class PlayState {
 	}
 	
 	public void draw(Graphics g){
-	g.setColor(Color.gray);	
-	g.fillRect(0, 0, 640, 480);
+	//g.setColor(Color.gray);	
+	background.draw(g);
+	
 	word.draw(g);
 	man.draw(g);
+	drawGuessed(g);
+	drawGuessed2(g);
 	}
 
 	public void checkIt(String s){
-		word.checkGuess(s);
+		
 		able = false;
 		guessed = true;
+		if(word.alreadyGuessed(s)){
+			startTimer();
+		}else{
+		word.checkGuess(s);
 		guessesMade++;
 		startTimer();
+		}
 		started = 1;
 		moveWait();
+		
 	}
 	
 	public void handleInput(){
