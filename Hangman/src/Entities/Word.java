@@ -36,7 +36,8 @@ public class Word {
 	public Word(PlayState p){
 		playstate = p;
 	}
-	
+
+
 	private void arrayInit(){
 		for(int i = 0; i < startWords.length; i++){
 			startLetter[i] = "";
@@ -67,7 +68,7 @@ public class Word {
 				String tempWord = br.readLine();
 				startWords[i] = tempWord;
 			}
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
